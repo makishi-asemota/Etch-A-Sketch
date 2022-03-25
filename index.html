@@ -8,6 +8,7 @@
     <title>Etch-A-Sketch</title>
 </head>
 <body>
+    <div id="numbutton"><button onclick="question()">Number of Boxes</button></div>
     <div id="container"></div>
     <script>
      const container = document.getElementById("container");
@@ -23,6 +24,10 @@
 
     makeRows(16, 16);
 
+    function reset() {
+        container.innerHTML = '';
+    }
+
    function color() {
        let boxs = document.querySelectorAll('.grid-item');
        boxs.forEach(box => {
@@ -33,6 +38,14 @@
    };
 
    color()
+
+   function question() {
+       reset();
+       let numberOFBoxes = prompt("Enter the number of boxes you want per side: ");
+       let numOfBoxes = parseInt(numberOFBoxes);
+       makeRows(numOfBoxes, numOfBoxes);
+       color();
+   }
     </script>
 </body>
 </html>
