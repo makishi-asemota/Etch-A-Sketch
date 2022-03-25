@@ -8,11 +8,18 @@
     <title>Etch-A-Sketch</title>
 </head>
 <body>
-    <div id="numbutton"><button onclick="question()">Number of Boxes</button></div>
+    <div id="title">Etch-A-Sketch</div>
+    <div id="numbutton">
+        <button onclick="question()">Number of Boxes</button>
+        <button onclick="resetButton()">Reset</button>
+        <button onclick="changeColor()">Change Color</button>
+    </div>
     <div id="container"></div>
     <script>
      const container = document.getElementById("container");
 
+
+     //function that makes 16x16 grid on page startup
      function makeRows(rows, cols) {
       container.style.setProperty('--grid-rows', rows);
       container.style.setProperty('--grid-cols', cols);
@@ -24,10 +31,19 @@
 
     makeRows(16, 16);
 
+    //function to reset and erase the color from grid
     function reset() {
         container.innerHTML = '';
     }
 
+    //function for reset button to clear grid
+    function resetButton() {
+        reset();
+        makeRows(16, 16);
+        color();
+    }
+
+    //function that gives the mouse a default black color when hovering mouse over grid 
    function color() {
        let boxs = document.querySelectorAll('.grid-item');
        boxs.forEach(box => {
@@ -39,12 +55,24 @@
 
    color()
 
+   //function for button that asks the user how many boxes they wish to have on each side of the grid
    function question() {
        reset();
        let numberOFBoxes = prompt("Enter the number of boxes you want per side: ");
        let numOfBoxes = parseInt(numberOFBoxes);
        makeRows(numOfBoxes, numOfBoxes);
        color();
+   }
+
+   //function for button that asks the user what color they would like to change to
+   function changeColor(x) {
+      let colorPrompt = prompt("Enter the color that you would like to change to in lowercase please: ")
+      let boxs = document.querySelectorAll('.grid-item');
+         boxs.forEach(box => {
+           box.addEventListener('mouseover', () => {
+            box.style.backgroundColor = colorPrompt;
+           });
+        });
    }
     </script>
 </body>
